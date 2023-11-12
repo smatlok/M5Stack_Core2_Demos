@@ -20,12 +20,14 @@ def numpad_event_handler(source, evt):
           ta.add_text(txt)
           
         else: #quit numpad
-            taValue = int(ta.get_text()) #backup before delete
+            taValue = ta.get_text() #backup before delete
             numpadCont.delete()
             screen.set_screen_bg_color(0xFFFFFF) #refresh screen - maybe there is a better solution as well?
-            
             if txt == lv.SYMBOL.NEW_LINE: #Newline is ENTER Symbol 
-                _callBackPrt(taValue)
+                if len(taValue) == 0:
+                    _callBackPrt(0);
+                else:
+                    _callBackPrt(int(taValue))
             else:
                 _callBackPrt(_initVal)
 
@@ -97,4 +99,5 @@ def BtnFunction(): #Callback function for GUI button - wrapper for 2 addional pa
     
 touch_button0.pressed(BtnFunction) #register button callback
 #MAIN SECTION----------------------------------- 
+
 
